@@ -104,6 +104,7 @@
                     <p class="mt-3 mb-0 text-muted text-sm">
                         <span class="text-success mr-2">
                             <i data-feather="trending-up" class="feather-sm"></i> 
+                            {{-- {{ round((end($monthlyVisitors)/max(array_sum($monthlyVisitors), 1)*100) }}% --}}
                         </span>
                         <span class="text-nowrap">Bulan ini</span>
                     </p>
