@@ -52,12 +52,12 @@
     </a>
 </li>
 
-<li class="sidebar-item {{ request()->routeIs('admin.alasan-banner.*') ? 'active' : '' }}">
+{{-- <li class="sidebar-item {{ request()->routeIs('admin.alasan-banner.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('admin.alasan-banner.index') }}">
         <i class="align-middle" data-feather="image"></i> 
         <span class="align-middle">Banner Alasan</span>
     </a>
-</li>
+</li> --}}
 
 <li class="sidebar-item {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('admin.berita.index') }}">
