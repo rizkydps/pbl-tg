@@ -33,7 +33,7 @@ class AdminOutputLulusanController extends Controller
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('images', 'public');
             }
-    
+            
             $allowedTags = '<p><a><b><strong><i><u><em><br><ol><li>';
 
             OutputLulusan::create([
@@ -41,9 +41,10 @@ class AdminOutputLulusanController extends Controller
                 'title' => $request->title,
                 'description' => strip_tags($request->description, $allowedTags),
             ]);
-    
+            
             return redirect()->route('admin.output-lulusan.index')->with('success', 'Berita berhasil ditambahkan.');
         } catch (\Exception $e) {
+            
             return redirect()->route('admin.output-lulusan.index')->with('failed', 'Terjadi kesalahan, perubahan gagal!');
         }
     }
@@ -83,6 +84,7 @@ class AdminOutputLulusanController extends Controller
     
             return redirect()->route('admin.output-lulusan.index')->with('success', 'Output Lulusan Berhasil Diubah!');
         } catch (\Exception $e) {
+            
             return redirect()->route('admin.output-lulusan.index')->with('failed', 'Terjadi kesalahan, perubahan gagal!');
         }
     }

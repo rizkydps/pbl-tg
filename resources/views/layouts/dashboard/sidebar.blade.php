@@ -72,3 +72,10 @@
         <span class="align-middle">Output Lulusan</span>
     </a>
 </li>
+
+<li class="sidebar-item {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+    <a class="sidebar-link" href="{{ route('admin.user.index') }}">
+        <i class="align-middle" data-feather="award"></i> 
+        <span class="align-middle">Users Control</span>
+    </a>
+</li>

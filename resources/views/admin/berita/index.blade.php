@@ -40,39 +40,43 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <img src="{{ Storage::url($berita->image) }}" alt="Berita Image" width="50">
-                                            <td>{{ $berita->formatted_date }}</td>
+                                            @if($berita->image)
+                                                <img src="{{ Storage::url($berita->image) }}" alt="Berita Image" width="50" height="50" style="object-fit: cover;">
+                                            @else
+                                                <span class="text-muted">No Image</span>
+                                            @endif
                                         </td>
-                                        <td class="text-truncate text-nowrap w-25" style="max-width: 250px;">{!! $berita->description !!}</td>
-                                        <td>{{ $berita->formatted_date }}</td>
+                                        <td class="text-truncate" style="max-width: 200px;">{{ $berita->title }}</td>
+                                        <td class="text-truncate" style="max-width: 250px;">{!! Str::limit(strip_tags($berita->description), 100) !!}</td>
+                                        <td>{{ \Carbon\Carbon::parse($berita->date)->format('d M Y') }}</td>
                                         <td>
-                                            <a href="{{ route('admin.berita.edit', $berita->id) }}" class="btn btn-warning">Ubah</a> 
+                                            <a href="{{ route('admin.berita.edit', $berita->id) }}" class="btn btn-warning btn-sm">Ubah</a> 
                                             <!-- DELETE BERITA BUTTON TRIGGER MODAL -->
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#berita-delete-{{ $berita->id }}">
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#berita-delete-{{ $berita->id }}">
                                                 Hapus
                                             </button>
                                             <!-- DELETE BERITA MODAL -->
-                                            <form action="{{ route('admin.berita.delete', $berita->id) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                @method('delete')
-                                                <div class="modal fade" id="berita-delete-{{ $berita->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Berita</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Hapus Berita?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <div class="modal fade" id="berita-delete-{{ $berita->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus Berita</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus berita "<strong>{{ $berita->title }}</strong>"?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                            <form action="{{ route('admin.berita.delete', $berita->id) }}" method="POST" style="display: inline;">
+                                                                @csrf
+                                                                @method('delete')
                                                                 <button type="submit" class="btn btn-danger">Hapus</button>
-                                                            </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

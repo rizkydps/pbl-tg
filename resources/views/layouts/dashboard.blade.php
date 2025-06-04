@@ -37,6 +37,7 @@
     </div>
 
     @include('layouts.dashboard.script')
+    @stack('scripts')
 
 </body>
 

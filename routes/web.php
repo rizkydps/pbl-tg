@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminOutputLulusanController;
 use App\Http\Controllers\Admin\VisiMisiController;
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\AdminUserController;
 
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\Admin\AdminDosenController;
@@ -70,6 +71,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::delete('/{partner}', [PartnerController::class, 'destroy'])->name('destroy');
     });
 
+
+    // Dalam group prefix('admin')
+Route::prefix('users')->name('admin.user.')->group(function () {
+    Route::get('/', [AdminUserController::class, 'index'])->name('index');
+    Route::get('/create', [AdminUserController::class, 'create'])->name('create');
+    Route::post('/', [AdminUserController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [AdminUserController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [AdminUserController::class, 'update'])->name('update');
+    Route::delete('/{id}', [AdminUserController::class, 'delete'])->name('delete');
+});
 
 
     // Rest of admin routes
